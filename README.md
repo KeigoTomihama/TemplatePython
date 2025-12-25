@@ -1,0 +1,2 @@
+# TemplatePython
+Pythonの開発環境用のテンプレートリポジトリ
