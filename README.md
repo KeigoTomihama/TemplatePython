@@ -35,6 +35,20 @@ source .venv/bin/activate  # macOS/Linux
 uv run pre-commit install
 ```
 
+> **注意**:\
+> 初回のコミット時は、pre-commitの各ツール（ruff、black、mypy）の環境が初期化\
+> 初期化には、数十秒程度の時間がかかる
+>
+> 初回コミット時のログ例:
+> ```
+> [INFO] Initializing environment for https://github.com/charliermarsh/ruff-pre-commit.
+> [INFO] Initializing environment for https://github.com/psf/black.
+> [INFO] Initializing environment for https://github.com/pre-commit/mirrors-mypy.
+> [INFO] Installing environment for https://github.com/charliermarsh/ruff-pre-commit.
+> [INFO] Once installed this environment will be reused.
+> [INFO] This may take a few minutes...
+> ```
+
 ## インストールされているライブラリ
 
 ### 全体ライブラリ（dependencies）
