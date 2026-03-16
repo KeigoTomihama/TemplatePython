@@ -1,5 +1,11 @@
 # TemplatePython
+
 Pythonの開発環境用のテンプレートリポジトリ
+
+## 変更履歴
+
+- 2025-12-25: プロジェクト作成
+- 2024-06-13: Devcontainerによる環境開発設定を追記
 
 # Python環境構築
 
@@ -20,17 +26,20 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 プロジェクトには`pyproject.toml`が既に設定されています。以下のコマンドで依存関係をインストールしてください。
 
 ### 仮想環境の作成と依存関係のインストール
+
 ```bash
 uv sync
 ```
 
 ### 仮想環境の有効化
+
 ```bash
 source .venv/bin/activate  # macOS/Linux
 .venv\Scripts\activate     # Windows
 ```
 
 ### pre-commitのセットアップ
+
 ```bash
 uv run pre-commit install
 ```
@@ -40,6 +49,7 @@ uv run pre-commit install
 > 初期化には、数十秒程度の時間がかかる
 >
 > 初回コミット時のログ例:
+>
 > ```
 > [INFO] Initializing environment for https://github.com/charliermarsh/ruff-pre-commit.
 > [INFO] Initializing environment for https://github.com/psf/black.
@@ -52,11 +62,13 @@ uv run pre-commit install
 ## インストールされているライブラリ
 
 ### 全体ライブラリ（dependencies）
+
 - **pydantic**: データバリデーションライブラリ
 - **pydantic-settings**: 設定管理ライブラリ
 - **python-dotenv**: 環境変数管理ライブラリ
 
 ### 開発用ライブラリ（dev）
+
 - **ruff**: 高速なPythonリンター・フォーマッター
 - **black**: コードフォーマッター
 - **mypy**: 静的型チェッカー
@@ -66,6 +78,7 @@ uv run pre-commit install
 # Pythonフォーマッター
 
 ## Black設定
+
 ```toml
 [tool.black]
 line-length = 88           # 1行の最大文字数を88文字に設定
@@ -73,6 +86,7 @@ target-version = ["py312"] # Python 3.12をターゲットバージョンとし�
 ```
 
 ## Ruff設定
+
 ```toml
 [tool.ruff]
 exclude = ["node_modules", ".venv", "venv", "__pypackages__"]  # チェック対象から除外するディレクトリ
@@ -106,6 +120,7 @@ line-ending = "auto"                # 改行コードを自動検出
 ```
 
 ## Mypy設定
+
 ```toml
 [tool.mypy]
 python_version = "3.12"           # Python 3.12をターゲットバージョンとして設定
@@ -115,3 +130,28 @@ disallow_untyped_defs = true      # 型アノテーションのない関数定�
 warn_return_any = true            # Any型の返り値に警告
 strict_optional = true            # Optional型のチェックを厳格化
 ```
+
+# Devcontainerによる開発環境構築
+
+このプロジェクトには、[Dev Containers](https://containers.dev/)を利用した開発環境の設定が含まれています。Devcontainerを使うことで、ローカル環境に依存しない一貫した開発環境を簡単に構築可能
+
+## フォルダ構成
+
+```
+.devcontainer/
+├── devcontainer_sample.json  # サンプル設定ファイル
+```
+
+## 利用方法
+
+1. `.devcontainer/devcontainer_sample.json` を `.devcontainer/devcontainer.json` にコピー
+
+```bash
+cp .devcontainer/devcontainer_sample.json .devcontainer/devcontainer.json
+```
+
+2. 必要に応じて `devcontainer.json` を編集し、プロジェクトに合わせて設定を調整。[設定のドキュメント](https://containers.dev/implementors/json_reference/)
+
+3. [VS Code Dev Containers拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)などを利用して、`Reopen in Container` を実行すると、定義された環境で開発可能。
+
+> **補足**: サンプルファイルを直接編集せず、必ずコピーしてから利用sすること。
